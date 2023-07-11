@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnInsert, btnGetTasks;
     TextView tvResults;
-    EditText text, text2;
+    ListView lv;
+    EditText etTask, etDate;
+    ArrayList<String> allTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +29,45 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsert);
         btnGetTasks = findViewById(R.id.btnGet);
         tvResults = findViewById(R.id.tvResults);
-        text2 = findViewById(R.id.editTextText2);
-        text = findViewById(R.id.editTextText);
+        lv = findViewById(R.id.lv);
+        etTask = findViewById(R.id.etTask);
+        etDate = findViewById(R.id.etDate);
 
+        allTask = new ArrayList<>();
+        ArrayAdapter aaTask = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,allTask);
+        lv.setAdapter(aaTask);
 
-
-
-        btnInsert.setOnClickListener(new View.OnClickListener() {
+        btnInsert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DBHelper dbHelper = new DBHelper(MainActivity.this);
-                String str = text2.getText().toString();
-                String str2 = text.getText().toString();
-                dbHelper.insertTask(str, str2);
+                // Create the DBHelper object, passing in the
+                // activity's Context
+                DBHelper db = new DBHelper(MainActivity.this);
+
+                // Insert a task
+//                db.insertTask("Submit RJ", "25 Apr 2021");
+                db.insertTask(etTask.getText().toString(), etDate.getText().toString());
             }
         });
 
-        btnGetTasks.setOnClickListener(new View.OnClickListener() {
+        btnGetTasks.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                // Create the DBHelper object, passing in the
+                // activity's Context
                 DBHelper db = new DBHelper(MainActivity.this);
+
+                // Insert a task
                 ArrayList<String> data = db.getTaskContent();
+                ArrayList<Task> datalist = db.getTasks();
+                db.close();
 
                 String txt = "";
                 for (int i = 0; i < data.size(); i++) {
                     Log.d("Database Content", i +". "+data.get(i));
                     txt += i + ". " + data.get(i) + "\n";
+                    allTask.add(datalist.get(i).getId() + " \n" + datalist.get(i).getDescription() + " \n" + datalist.get(i).getDate() + " ");
+                    aaTask.notifyDataSetChanged();
                 }
                 tvResults.setText(txt);
             }

@@ -3,6 +3,12 @@ package sg.edu.rp.c346.id22016439.p08;
 import androidx.annotation.NonNull;
 
 public class Task {
+    @NonNull
+    @Override
+    public String toString() {
+        return id + "\n" + description + "\n" + date;
+    }
+
     private int id;
     private String description;
     private String date;
@@ -19,9 +25,7 @@ public class Task {
 
     public String getDate() { return date;}
 
-    @NonNull
-    @Override
-    public String toString() {
-        return id + "\n" + description + "\n" + date;
-    }
+
+
+
 }
