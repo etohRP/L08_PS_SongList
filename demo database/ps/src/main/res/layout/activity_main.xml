@@ -1,7 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/_4a3f8632fb740996bd9e39cff31aa04"
     android:orientation="vertical">
 
     <TextView
@@ -10,6 +12,7 @@
         android:layout_height="68dp"
         android:gravity="center"
         android:text="Song List"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold" />
 
@@ -18,27 +21,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Song title"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etSongTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableTint="#00FFFFFF"
         android:ems="10"
         android:hint="Enter song title here"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvSingers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Singers"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etSingers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Enter singer's name here"
         android:inputType="text" />
@@ -48,12 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Year"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Enter year song released"
         android:inputType="text" />
@@ -63,43 +74,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Stars"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/rgStars"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1" />
+            android:text="1"
+            android:textColor="#FFFFFF" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2" />
+            android:text="2"
+            android:textColor="#FFFFFF" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3" />
+            android:text="3"
+            android:textColor="#FFFFFF" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4" />
+            android:text="4"
+            android:textColor="#FFFFFF" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5" />
+            android:text="5"
+            android:textColor="#FFFFFF" />
 
     </RadioGroup>
 
@@ -114,7 +131,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="insert" />
+            android:backgroundTint="#784F4F"
+            android:drawableTint="#9F6868"
+            android:foregroundTint="#A85F5F"
+            android:shadowColor="#886D6D"
+            android:text="insert"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#B88686"
+            app:iconTint="#00653C3C"
+            app:rippleColor="#FFFFFF"
+            app:strokeColor="#785656" />
 
         <Button
             android:id="@+id/btnShow"

@@ -54,4 +54,12 @@ public class Song implements Serializable {
     public String toString() {
         return id + "\n" + title + "\n" + singers + "\n" + year + "\n" + stars;
     }
+
+    public String starsShow() {
+        StringBuilder starBuilder = new StringBuilder();
+        for (int i = 0; i < stars; i++) {
+            starBuilder.append("* ");
+        }
+        return starBuilder.toString().trim();
+    }
 }

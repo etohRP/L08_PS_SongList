@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VER = 2;
+    private static final int DATABASE_VER = 5;
     private static final String DATABASE_NAME = "songs.db";
     private static final String TABLE_TASK = "song";
     private static final String COLUMN_ID = "_id";
@@ -47,18 +47,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void insertSong(String title, String singers, int year, int stars){
 
-        // Get an instance of the database for writing
+
         SQLiteDatabase db = this.getWritableDatabase();
-        // We use ContentValues object to store the values for
-        //  the db operation
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, title);
         values.put(COLUMN_SINGERS, singers);
         values.put(COLUMN_YEAR, year);
         values.put(COLUMN_STARS, stars);
-        // Insert the row into the TABLE_TASK
         db.insert(TABLE_TASK, null, values);
-        // Close the database connection
         db.close();
     }
 

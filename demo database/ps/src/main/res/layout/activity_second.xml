@@ -4,36 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/_4a3f8632fb740996bd9e39cff31aa04"
     android:orientation="vertical"
-    tools:context=".DisplayActivity"
-    >
+    tools:context=".DisplayActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="30dp">
+        android:layout_margin="30dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnFilterStars"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show" />
+            android:text="SHOW ALL SONGS WITH 5 STARS" />
 
         <Spinner
             android:id="@+id/spinnerYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            />
+            android:backgroundTint="#FFFFFF"
+            android:padding="10dp" />
 
         <ListView
             android:id="@+id/lvDisplay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-             />
+            android:cacheColorHint="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

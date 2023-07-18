@@ -12,7 +12,7 @@
             android:name=".EditActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondActivity"
+            android:name=".DisplayActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -16,14 +16,37 @@ import java.util.Calendar;
 
 public class DisplayActivity extends AppCompatActivity {
 
+    ArrayList<Song> songList;
+    ArrayList<Song> filteredSongList;
+    CustomAdapter customAdapter;
     Button btnStars;
     Spinner spinnerYear;
     ListView lvResults;
 
+
     @Override
     protected void onResume() {
         super.onResume();
-        btnStars.performClick();
+        DBHelper db = new DBHelper(DisplayActivity.this);
+        songList.clear();
+        songList.addAll(db.getSongs());
+        db.close();
+
+        if (btnStars.isActivated()) {
+            filteredSongList = new ArrayList<>();
+            for (int i = 0; i < songList.size(); i++) {
+                if (songList.get(i).getStars() == 5) {
+                    filteredSongList.add(songList.get(i));
+                }
+            }
+            customAdapter = new CustomAdapter(DisplayActivity.this, R.layout.row, filteredSongList);
+            lvResults.setAdapter(customAdapter);
+        } else {
+            customAdapter = new CustomAdapter(DisplayActivity.this, R.layout.row, songList);
+            lvResults.setAdapter(customAdapter);
+        }
+
+        customAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -45,23 +68,28 @@ public class DisplayActivity extends AppCompatActivity {
         spinnerYear.setAdapter(adapter);
 
         DBHelper db = new DBHelper(DisplayActivity.this);
-        ArrayList<Song> songList = db.getSongs();
+        songList = db.getSongs();
         db.close();
-        //ArrayList<Song> song = db.getSongs();
-        ArrayAdapter aaSongs = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, songList);
-        lvResults.setAdapter(aaSongs);
+        //ArrayAdapter aaSongs = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, songList);
+        //lvResults.setAdapter(aaSongs);
+
+        customAdapter = new CustomAdapter(this, R.layout.row, songList);
+        lvResults.setAdapter(customAdapter);
 
         btnStars.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Song> filteredSongList = new ArrayList<>();
+                filteredSongList = new ArrayList<>();
                 for (int i = 0; i < songList.size(); i++) {
                     if (songList.get(i).getStars() == 5) {
                         filteredSongList.add(songList.get(i));
                     }
                 }
-                ArrayAdapter<Song> aaFilteredSongs = new ArrayAdapter<>(DisplayActivity.this, android.R.layout.simple_list_item_1, filteredSongList);
-                lvResults.setAdapter(aaFilteredSongs);
+                //ArrayAdapter<Song> aaFilteredSongs = new ArrayAdapter<>(DisplayActivity.this, android.R.layout.simple_list_item_1, filteredSongList);
+                //lvResults.setAdapter(aaFilteredSongs);
+
+                customAdapter = new CustomAdapter(DisplayActivity.this, R.layout.row, filteredSongList);
+                lvResults.setAdapter(customAdapter);
             }
         });
 
@@ -70,15 +98,16 @@ public class DisplayActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedYear = parent.getItemAtPosition(position).toString();
 
-                ArrayList<Song> filteredSongList = new ArrayList<>();
+                filteredSongList = new ArrayList<>();
                 for (int i = 0; i < songList.size(); i++) {
                     if (String.valueOf(songList.get(i).getYear()).equals(selectedYear)) {
                         filteredSongList.add(songList.get(i));
                     }
                 }
-
-                ArrayAdapter<Song> aaFilteredSongs = new ArrayAdapter<>(DisplayActivity.this, android.R.layout.simple_list_item_1, filteredSongList);
-                lvResults.setAdapter(aaFilteredSongs);
+                //ArrayAdapter<Song> aaFilteredSongs = new ArrayAdapter<>(DisplayActivity.this, android.R.layout.simple_list_item_1, filteredSongList);
+                //lvResults.setAdapter(aaFilteredSongs);
+                customAdapter = new CustomAdapter(DisplayActivity.this, R.layout.row, filteredSongList);
+                lvResults.setAdapter(customAdapter);
             }
 
             @Override
@@ -90,7 +119,7 @@ public class DisplayActivity extends AppCompatActivity {
         lvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Song song = songList.get(position);
+                Song song = filteredSongList.get(position);
                 Intent intent = new Intent(DisplayActivity.this, EditActivity.class);
                 intent.putExtra("song", song);
                 startActivity(intent);
